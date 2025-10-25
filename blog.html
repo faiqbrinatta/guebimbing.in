@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>@guebimbing.in — Skripsi Wellness Coaching</title>
+        <meta name="description" content="Platform bimbingan skripsi yang mengajarkan, bukan mengerjakan. Berbasis Skripsi Wellness Coaching (SWC).">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <!-- AOS CSS -->
+        <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+            theme: {
+            extend: {
+            fontFamily: { sans: ['Poppins', 'ui-sans-serif', 'system-ui'] },
+            colors: {
+            primary: { DEFAULT: '#2563EB' },   /* blue-600 */
+            secondary: { DEFAULT: '#1D4ED8' }  /* blue-700 */
+            }
+            }
+            }
+            }
+        </script>
+        <style>html{scroll-behavior:smooth}</style>
+    </head>
+    <body class="antialiased text-slate-800 bg-white">
+        <header class="sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-slate-200/70 shadow-[0_1px_8px_rgba(0,0,0,0.05)] transition-all duration-300">
+            <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+                <div class="flex h-16 items-center justify-between">
+
+                    <!-- Brand -->
+                    <a href="#home" class="flex items-center gap-2 group" aria-label="Beranda @guebimbing.in">
+                        <div class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-tr from-blue-100 to-indigo-100 text-primary ring-1 ring-blue-200 shadow-sm group-hover:scale-105 transition">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M4 5a2 2 0 0 1 2-2h9a1 1 0 0 1 .8.4l3 3a1 1 0 0 1 .2.6V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5zM6 5v14h11V8h-2a2 2 0 0 1-2-2V4H6z"/>
+                            </svg>
+                        </div>
+                        <span class="font-semibold tracking-tight text-slate-900 group-hover:text-primary transition">@guebimbing.in</span>
+                    </a>
+
+                    <!-- Desktop Navigation -->
+                    <nav aria-label="Utama" class="hidden md:flex items-center gap-8 text-[15px] font-medium text-slate-700">
+                        <a href="gueBimbing.html" class="hover:text-primary transition">Beranda</a>
+                        <a href="gueBimbing.html" class="hover:text-primary transition">Tentang</a>
+                        <a href="gueBimbing.html" class="hover:text-primary transition">Layanan</a>
+                        <a href="blog.html" class="hover:text-primary transition">Blog</a>
+                        <a href="#video" class="hover:text-primary transition">Video</a>
+                        <a href="gueBimbing.html" class="hover:text-primary transition">Testimoni</a>
+                        <a href="gueBimbing.html" class="hover:text-primary transition">Kontak</a>
+                    </nav>
+
+                    <!-- CTA Button -->
+                    <div class="hidden md:block">
+                        <a href="#login" class="inline-flex items-center rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                        Login
+                        </a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="menuBtn"
+                        class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                        aria-controls="mobileMenu" aria-expanded="false" aria-label="Buka menu">
+                        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden hidden border-t border-slate-200 bg-white/95 backdrop-blur-sm" role="dialog" aria-modal="true">
+                <div class="px-4 py-3 space-y-2 text-slate-700">
+                    <a href="gueBimbing.html" class="block py-2 hover:text-primary">Beranda</a>
+                    <a href="gueBimbing.html" class="block py-2 hover:text-primary">Tentang</a>
+                    <a href="gueBimbing.html" class="block py-2 hover:text-primary">Layanan</a>
+                    <a href="blog.html" class="block py-2 hover:text-primary">Blog</a>
+                    <a href="#video" class="block py-2 hover:text-primary">Video</a>
+                    <a href="gueBimbing.html" class="block py-2 hover:text-primary">Testimoni</a>
+                    <a href="gueBimbing.html" class="block py-2 hover:text-primary">Kontak</a>
+                    <a href="#login"
+                    class="mt-3 inline-flex w-full justify-center items-center rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:brightness-110">
+                    Login
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- blog Section -->
+        <section class="max-w-7xl mx-auto px-4 py-10">
+          <!-- Latest Articles -->
+          <h2 class="text-2xl font-semibold mb-6">Latest Articles</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            <!-- Article Card -->
+            <a href="detailBlog.html" class="block group">
+                <div class="relative" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover rounded" />
+                    <div class="absolute top-2 left-2 bg-yellow-400 text-sm w-10 h-10 flex flex-col items-center justify-center rounded-sm shadow-md text-gray-800">
+                        <span class="leading-tight">25</span>
+                        <span class="leading-tight">Mar</span>
+                    </div>
+                    <div class="mt-3">
+                        <p class="text-sm text-gray-500">Business</p>
+                        <h3 class="font-semibold">Guide To Newly Supported Modern CSS Pseudo</h3>
+                        <p class="text-sm text-gray-600">Budae auctor lectus lobortis convallis auctorised niscat rhoncus parturient convallis in parturient</p>
+                    </div>
+                </div>
+            </a>
+
+            <div class="relative" data-aos="fade-up" data-aos-delay="200">
+              <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover rounded" />
+              <div class="absolute top-2 left-2 bg-yellow-400 text-sm w-10 h-10 flex flex-col items-center justify-center rounded-sm shadow-md text-gray-800">
+                <span class="leading-tight">25</span>
+                <span class="leading-tight">Mar</span>
+              </div>
+              <div class="mt-3">
+                <p class="text-sm text-gray-500">Business</p>
+                <h3 class="font-semibold">Guide To Newly Supported Modern CSS Pseudo</h3>
+                <p class="text-sm text-gray-600">Budae auctor lectus lobortis convallis auctorised niscat rhoncus parturient convallis in parturient</p>
+              </div>
+            </div>
+
+            <div class="relative" data-aos="fade-up" data-aos-delay="200">
+              <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover rounded" />
+              <div class="absolute top-2 left-2 bg-yellow-400 text-sm w-10 h-10 flex flex-col items-center justify-center rounded-sm shadow-md text-gray-800">
+                <span class="leading-tight">25</span>
+                <span class="leading-tight">Mar</span>
+              </div>
+              <div class="mt-3">
+                <p class="text-sm text-gray-500">Business</p>
+                <h3 class="font-semibold">Guide To Newly Supported Modern CSS Pseudo</h3>
+                <p class="text-sm text-gray-600">Budae auctor lectus lobortis convallis auctorised niscat rhoncus parturient convallis in parturient</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Featured Articles -->
+          <h2 class="text-2xl font-semibold mb-6">Featured Articles</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            <div class="relative" data-aos="fade-up" data-aos-delay="200">
+              <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover rounded" />
+              <div class="absolute top-2 left-2 bg-yellow-400 text-sm w-10 h-10 flex flex-col items-center justify-center rounded-sm shadow-md text-gray-800">
+                <span class="leading-tight">25</span>
+                <span class="leading-tight">Mar</span>
+              </div>
+              <div class="mt-3">
+                <p class="text-sm text-gray-500">Business</p>
+                <h3 class="font-semibold">Guide To Newly Supported Modern CSS Pseudo</h3>
+                <p class="text-sm text-gray-600">Budae auctor lectus lobortis convallis auctorised niscat rhoncus parturient convallis in parturient</p>
+              </div>
+            </div>
+
+            <div class="relative" data-aos="fade-up" data-aos-delay="200">
+              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover rounded" />
+              <div class="absolute top-2 left-2 bg-yellow-400 text-sm w-10 h-10 flex flex-col items-center justify-center rounded-sm shadow-md text-gray-800">
+                <span class="leading-tight">25</span>
+                <span class="leading-tight">Mar</span>
+              </div>
+              <div class="mt-3">
+                <p class="text-sm text-gray-500">Business</p>
+                <h3 class="font-semibold">Guide To Newly Supported Modern CSS Pseudo</h3>
+                <p class="text-sm text-gray-600">Budae auctor lectus lobortis convallis auctorised niscat rhoncus parturient convallis in parturient</p>
+              </div>
+            </div>
+
+            <div class="relative" data-aos="fade-up" data-aos-delay="200">
+              <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover rounded" />
+              <div class="absolute top-2 left-2 bg-yellow-400 text-sm w-10 h-10 flex flex-col items-center justify-center rounded-sm shadow-md text-gray-800">
+                <span class="leading-tight">25</span>
+                <span class="leading-tight">Mar</span>
+              </div>
+              <div class="mt-3">
+                <p class="text-sm text-gray-500">Business</p>
+                <h3 class="font-semibold">Guide To Newly Supported Modern CSS Pseudo</h3>
+                <p class="text-sm text-gray-600">Budae auctor lectus lobortis convallis auctorised niscat rhoncus parturient convallis in parturient</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Popular Articles -->
+          <h2 class="text-2xl font-semibold mb-6">Popular Articles</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="relative" data-aos="fade-up" data-aos-delay="200">
+              <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover rounded" />
+              <div class="absolute top-2 left-2 bg-yellow-400 text-sm w-10 h-10 flex flex-col items-center justify-center rounded-sm shadow-md text-gray-800">
+                <span class="leading-tight">25</span>
+                <span class="leading-tight">Mar</span>
+              </div>
+              <div class="mt-3">
+                <p class="text-sm text-gray-500">Business</p>
+                <h3 class="font-semibold">Guide To Newly Supported Modern CSS Pseudo</h3>
+                <p class="text-sm text-gray-600">Budae auctor lectus lobortis convallis auctorised niscat rhoncus parturient convallis in parturient</p>
+              </div>
+            </div>
+            <div class="relative" data-aos="fade-up" data-aos-delay="200">
+              <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover rounded" />
+              <div class="absolute top-2 left-2 bg-yellow-400 text-sm w-10 h-10 flex flex-col items-center justify-center rounded-sm shadow-md text-gray-800">
+                <span class="leading-tight">25</span>
+                <span class="leading-tight">Mar</span>
+              </div>
+              <div class="mt-3">
+                <p class="text-sm text-gray-500">Business</p>
+                <h3 class="font-semibold">Guide To Newly Supported Modern CSS Pseudo</h3>
+                <p class="text-sm text-gray-600">Budae auctor lectus lobortis convallis auctorised niscat rhoncus parturient convallis in parturient</p>
+              </div>
+            </div>
+            <div class="relative" data-aos="fade-up" data-aos-delay="200">
+              <img src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover rounded" />
+              <div class="absolute top-2 left-2 bg-yellow-400 text-sm w-10 h-10 flex flex-col items-center justify-center rounded-sm shadow-md text-gray-800">
+                <span class="leading-tight">25</span>
+                <span class="leading-tight">Mar</span>
+              </div>
+              <div class="mt-3">
+                <p class="text-sm text-gray-500">Business</p>
+                <h3 class="font-semibold">Guide To Newly Supported Modern CSS Pseudo</h3>
+                <p class="text-sm text-gray-600">Budae auctor lectus lobortis convallis auctorised niscat rhoncus parturient convallis in parturient</p>
+              </div>
+            </div>
+            <div class="relative" data-aos="fade-up" data-aos-delay="200">
+              <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover rounded" />
+              <div class="absolute top-2 left-2 bg-yellow-400 text-sm w-10 h-10 flex flex-col items-center justify-center rounded-sm shadow-md text-gray-800">
+                <span class="leading-tight">25</span>
+                <span class="leading-tight">Mar</span>
+              </div>
+              <div class="mt-3">
+                <p class="text-sm text-gray-500">Business</p>
+                <h3 class="font-semibold">Guide To Newly Supported Modern CSS Pseudo</h3>
+                <p class="text-sm text-gray-600">Budae auctor lectus lobortis convallis auctorised niscat rhoncus parturient convallis in parturient</p>
+              </div>
+            </div>
+            <div class="relative" data-aos="fade-up" data-aos-delay="200">
+              <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover rounded" />
+              <div class="absolute top-2 left-2 bg-yellow-400 text-sm w-10 h-10 flex flex-col items-center justify-center rounded-sm shadow-md text-gray-800">
+                <span class="leading-tight">25</span>
+                <span class="leading-tight">Mar</span>
+              </div>
+              <div class="mt-3">
+                <p class="text-sm text-gray-500">Business</p>
+                <h3 class="font-semibold">Guide To Newly Supported Modern CSS Pseudo</h3>
+                <p class="text-sm text-gray-600">Budae auctor lectus lobortis convallis auctorised niscat rhoncus parturient convallis in parturient</p>
+              </div>
+            </div>
+            <div class="relative" data-aos="fade-up" data-aos-delay="200">
+              <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover rounded" />
+              <div class="absolute top-2 left-2 bg-yellow-400 text-sm w-10 h-10 flex flex-col items-center justify-center rounded-sm shadow-md text-gray-800">
+                <span class="leading-tight">25</span>
+                <span class="leading-tight">Mar</span>
+              </div>
+              <div class="mt-3">
+                <p class="text-sm text-gray-500">Business</p>
+                <h3 class="font-semibold">Guide To Newly Supported Modern CSS Pseudo</h3>
+                <p class="text-sm text-gray-600">Budae auctor lectus lobortis convallis auctorised niscat rhoncus parturient convallis in parturient</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pagination -->
+          <div class="flex justify-center space-x-2 mt-10">
+            <button class="px-3 py-1 border rounded hover:bg-gray-100">&lt;</button>
+            <button class="px-3 py-1 border rounded bg-black text-white">1</button>
+            <button class="px-3 py-1 border rounded hover:bg-gray-100">2</button>
+            <button class="px-3 py-1 border rounded hover:bg-gray-100">3</button>
+            <span class="px-3 py-1">...</span>
+            <button class="px-3 py-1 border rounded hover:bg-gray-100">9</button>
+            <button class="px-3 py-1 border rounded hover:bg-gray-100">&gt;</button>
+          </div>
+        </section>
+
+
+         <!-- Footer -->
+        <footer class="relative border-t border-slate-200/70 bg-gradient-to-br from-white via-blue-50 to-blue-100/30">
+            <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 py-16">
+                <div class="grid gap-12 md:grid-cols-3">
+                    <!-- Brand -->
+                    <div>
+                        <div class="flex items-center gap-3">
+                            <div class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/80 ring-1 ring-blue-200 shadow-sm backdrop-blur">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="text-blue-600" aria-hidden="true">
+                                <path d="M4 5a2 2 0 0 1 2-2h9a1 1 0 0 1 .8.4l3 3a1 1 0 0 1 .2.6V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5zM6 5v14h11V8h-2a2 2 0 0 1-2-2V4H6z"/>
+                                </svg>
+                            </div>
+                            <span class="text-lg font-bold tracking-tight text-slate-900">@guebimbing.in</span>
+                        </div>
+                        <p class="mt-4 text-sm text-slate-600 max-w-xs leading-relaxed">
+                        <span class="font-medium text-primary">Belajar, Bimbing, Lulus</span> — dengan Wellness & Integrity.
+                        </p>
+                    </div>
+
+                    <!-- Navigation -->
+                    <nav aria-label="Footer" class="grid grid-cols-2 gap-10">
+                        <div>
+                            <h4 class="text-sm font-semibold text-slate-900 mb-3">Menu</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li><a href="#program" class="hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 rounded">Program</a></li>
+                                <li><a href="#blog" class="hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 rounded">Blog</a></li>
+                                <li><a href="#video" class="hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 rounded">Video</a></li>
+                                <li><a href="#contact" class="hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 rounded">Kontak</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-slate-900 mb-3">Sosial</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>
+                                        <a href="#" class="flex items-center gap-2 hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 rounded">
+                                            <svg class="h-4 w-4 text-blue-600" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                            <path d="M8 3C5.8 3 4 4.8 4 7v10c0 2.2 1.8 4 4 4h10c2.2 0 4-1.8 4-4V7c0-2.2-1.8-4-4-4H8zm10 2c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2h-2v-6h2.3l.4-2.8H16V8.5c0-.8.3-1.2 1.3-1.2h1V5.5h-1.6C14.9 5.5 14 6.6 14 8.3V10h-2v2h2v6h-4V5h8z"/>
+                                            </svg>
+                                            Instagram
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center gap-2 hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 rounded">
+                                            <svg class="h-4 w-4 text-blue-600" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                                <path d="M9 8l10 4-10 4V8z"/>
+                                            </svg>
+                                            YouTube
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center gap-2 hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 rounded">
+                                            <svg class="h-4 w-4 text-blue-600" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                                <path d="M12 2a10 10 0 1 0 10 10A10.01 10.01 0 0 0 12 2zm.1 15.6h-.2c-1.3 0-2.4-.3-3.3-.8l.5-2.1a6.2 6.2 0 0 0 2.6.7c.8 0 1.3-.3 1.3-.9 0-.4-.2-.8-.8-1.1l-.6-.3c-1.6-.8-2.4-1.8-2.4-3.1 0-2 1.5-3.4 3.8-3.4 1.1 0 2.1.2 3 .6l-.5 2a5.3 5.3 0 0 0-2.5-.6c-.7 0-1.2.3-1.2.8s.3.8.9 1.1l.6.3c1.5.7 2.2 1.7 2.2 3 0 2.1-1.6 3.6-3.9 3.6z"/>
+                                            </svg>
+                                             TikTok
+                                        </a>
+                                    </li>
+                                </ul>
+                        </div>
+                    </nav>
+
+                    <!-- Hours & Location -->
+                    <div>
+                        <h4 class="text-sm font-semibold text-slate-900 mb-3">Jam Operasional</h4>
+                        <ul class="text-sm text-slate-600 space-y-1">
+                            <li>Senin – Jumat: 09.00 – 21.00 WIB</li>
+                            <li>Sabtu: 09.00 – 17.00 WIB</li>
+                            <li>Minggu & Hari Libur: Tutup</li>
+                        </ul>
+                        <p class="mt-4 text-sm text-slate-600">
+                            <svg class="inline-block h-4 w-4 text-blue-600 mr-1 align-[-2px]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 2a7 7 0 0 0-7 7c0 5.3 5.2 10.3 6.6 11.5.2.1.6.1.8 0C13.8 19.3 19 14.3 19 9a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5z"/>
+                            </svg>
+                            Malang, Jawa Timur
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- divider -->
+                <div class="mt-12 border-t border-slate-200/80"></div>
+
+                <!-- bottom bar -->
+                <div class="mt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs text-slate-500">
+                    <p>© <span id="yearSpan"></span> <strong>@guebimbing.in</strong>. All rights reserved.</p>
+                    <div class="flex items-center gap-4">
+                        <a href="#" class="hover:text-slate-700">Kebijakan Privasi</a>
+                        <span class="hidden md:inline-block h-3 w-px bg-slate-300/80"></span>
+                        <a href="#" class="hover:text-slate-700">Syarat & Ketentuan</a>
+                        <span class="hidden md:inline-block h-3 w-px bg-slate-300/80"></span>
+                        <a href="#home" class="inline-flex items-center gap-1 hover:text-slate-700">
+                            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+                            Kembali ke atas
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            feather.replace();
+        </script>
+
+          <!-- AOS Script -->
+        <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+        <script>
+          AOS.init({
+            once: true,
+            duration: 800,
+            easing: 'ease-in-out',
+          });
+        </script>
+
+        
+        <script src="index.js"></script>
+</body>
+</html>

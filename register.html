@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Halaman pendaftaran akun platform bimbingan skripsi GueBimbingin" />
+    <title>GueBimbingin | Daftar Akun</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background: radial-gradient(circle at top left, #fff, #ffff);
+        overflow-x: hidden;
+      }
+
+      .shadow-glow {
+        box-shadow: 0 20px 45px rgba(94, 82, 255, 0.25);
+      }
+    </style>
+  </head>
+
+  <body class="flex items-center justify-center min-h-screen px-4">
+    <main
+      class="relative w-full max-w-5xl mx-auto flex flex-col md:flex-row rounded-3xl overflow-hidden shadow-glow"
+      data-aos="fade-up"
+      data-aos-duration="1000"
+      data-aos-easing="ease-out-cubic"
+    >
+      <!-- Kiri: Background Wave -->
+      <aside
+        class="relative hidden md:flex md:w-1/2 justify-center items-center text-white p-10 bg-gradient-to-br from-purple-700 to-blue-600"
+        data-aos="fade-right"
+        data-aos-delay="300"
+      >
+        <div class="absolute inset-0 wave-bg opacity-30"></div>
+        <div class="relative z-10 text-center px-6">
+          <h2 class="text-4xl font-bold mb-3 drop-shadow-lg">
+            Halo Pejuang Skripsi
+          </h2>
+          <p class="text-sm max-w-xs mx-auto text-blue-100">
+            Daftarkan dirimu dan mulai perjalanan skripsimu dengan bimbingan yang terarah ✨
+          </p>
+        </div>
+      </aside>
+
+      <!-- Kanan: Form -->
+      <section
+        class="glass flex-1 p-10 md:p-14 flex flex-col justify-center items-start text-gray-700"
+        data-aos="fade-left"
+        data-aos-delay="200"
+      >
+        <h2 class="text-3xl font-bold text-blue-700 mb-2">
+          Gue<span class="text-blue-600">Bimbing.in</span>
+        </h2>
+        <p class="text-sm mb-8 text-gray-500">
+          Daftar akun baru untuk memulai bimbingan skripsimu
+        </p>
+
+        <form action="#" method="POST" class="w-full space-y-5">
+          <!-- Nama -->
+          <div class="relative" data-aos="fade-left" data-aos-delay="400">
+            <input
+              type="text"
+              name="fullname"
+              placeholder="Nama Lengkap"
+              required
+              class="w-full pl-4 pr-4 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-400 focus:outline-none bg-white/80 transition-all duration-300"
+            />
+          </div>
+
+          <!-- Email -->
+          <div class="relative" data-aos="fade-left" data-aos-delay="500">
+            <input
+              type="email"
+              name="email"
+              placeholder="E-mail"
+              required
+              class="w-full pl-4 pr-4 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-400 focus:outline-none bg-white/80 transition-all duration-300"
+            />
+          </div>
+
+          <!-- Password -->
+          <div class="relative" data-aos="fade-left" data-aos-delay="600">
+            <input
+              type="password"
+              name="password"
+              placeholder="Kata Sandi"
+              required
+              class="w-full pl-4 pr-4 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-400 focus:outline-none bg-white/80 transition-all duration-300"
+            />
+          </div>
+
+          <!-- Konfirmasi Password -->
+          <div class="relative" data-aos="fade-left" data-aos-delay="700">
+            <input
+              type="password"
+              name="confirm-password"
+              placeholder="Konfirmasi Kata Sandi"
+              required
+              class="w-full pl-4 pr-4 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-400 focus:outline-none bg-white/80 transition-all duration-300"
+            />
+          </div>
+
+          <!-- Tombol -->
+          <button
+            type="submit"
+            class="w-full py-2 mt-2 rounded-xl font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 transition-all duration-300 transform hover:scale-[1.02]"
+            data-aos="zoom-in"
+            data-aos-delay="900"
+          >
+            Daftar Sekarang
+          </button>
+
+          <p class="mt-6 text-sm text-gray-500 text-center" data-aos="fade-up" data-aos-delay="1000">
+            Sudah punya akun?
+            <a href="login.html" class="text-blue-600 hover:underline">Masuk sekarang</a>
+          </p>
+        </form>
+      </section>
+    </main>
+
+    <script>
+      AOS.init();
+    </script>
+  </body>
+</html>

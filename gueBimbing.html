@@ -1,0 +1,969 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>@guebimbing.in — Skripsi Wellness Coaching</title>
+        <meta name="description" content="Platform bimbingan skripsi yang mengajarkan, bukan mengerjakan. Berbasis Skripsi Wellness Coaching (SWC).">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <script>
+            tailwind.config = {
+            theme: {
+            extend: {
+            fontFamily: { sans: ['Poppins', 'ui-sans-serif', 'system-ui'] },
+            colors: {
+            primary: { DEFAULT: '#2563EB' },   /* blue-600 */
+            secondary: { DEFAULT: '#1D4ED8' }  /* blue-700 */
+            }
+            }
+            }
+            }
+        </script>
+        <style>html{scroll-behavior:smooth}</style>
+    </head>
+    <body class="antialiased text-slate-800 bg-white">
+        <header class="sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-slate-200/70 shadow-[0_1px_8px_rgba(0,0,0,0.05)] transition-all duration-300">
+            <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+                <div class="flex h-16 items-center justify-between">
+
+                    <!-- Brand -->
+                    <a href="#home" class="flex items-center gap-2 group" aria-label="Beranda @guebimbing.in">
+                        <div class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-tr from-blue-100 to-indigo-100 text-primary ring-1 ring-blue-200 shadow-sm group-hover:scale-105 transition">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M4 5a2 2 0 0 1 2-2h9a1 1 0 0 1 .8.4l3 3a1 1 0 0 1 .2.6V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5zM6 5v14h11V8h-2a2 2 0 0 1-2-2V4H6z"/>
+                            </svg>
+                        </div>
+                        <span class="font-semibold tracking-tight text-slate-900 group-hover:text-primary transition">@guebimbing.in</span>
+                    </a>
+
+                    <!-- Desktop Navigation -->
+                    <nav aria-label="Utama" class="hidden md:flex items-center gap-8 text-[15px] font-medium text-slate-700">
+                        <a href="#home" class="hover:text-primary transition">Beranda</a>
+                        <a href="#about" class="hover:text-primary transition">Tentang</a>
+                        <a href="#program" class="hover:text-primary transition">Layanan</a>
+                        <a href="blog.html" class="hover:text-primary transition">Blog</a>
+                        <a href="#video" class="hover:text-primary transition">Video</a>
+                        <a href="#testimoni" class="hover:text-primary transition">Testimoni</a>
+                        <a href="#contact" class="hover:text-primary transition">Kontak</a>
+                    </nav>
+
+                    <!-- CTA Button -->
+                    <div class="hidden md:flex items-center gap-5">
+
+                        <!-- Cart button -->
+                        <a id="cartBtn" href="#cart" aria-label="Keranjang" class="relative inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white text-primary ring-1 ring-blue-200 shadow-sm hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <circle cx="9" cy="21" r="1"></circle>
+                                <circle cx="20" cy="21" r="1"></circle>
+                                <path d="M1 1h4l2.68 12.39a2 2 0 0 0 2 1.61h7.72a2 2 0 0 0 2-1.61L21 6H6"></path>
+                            </svg>
+                            <span id="cartBadge" class="absolute -top-1.5 -right-1.5 min-w-[1.25rem] h-5 px-1 rounded-full bg-red-500 text-white text-[11px] font-bold leading-none flex items-center justify-center ring-2 ring-white">
+                                0
+                            </span>
+                        </a>
+
+                        <a href="login.html" class="inline-flex items-center rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                        Login
+                        </a>
+
+                        <!-- DROPDOWN CART: muncul di bawah ikon keranjang -->
+                        <div id="cartPanel" class="absolute right-0 top-full mt-3 w-96 max-w-[90vw] translate-x-[-40px] z-[1000] rounded-xl bg-white shadow-lg ring-1 ring-blue-100 hidden transition-transform duration-200">
+                            <div class="p-5">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="text-lg font-semibold text-slate-900">Keranjang</h3>
+                                    <div class="flex items-center gap-2">
+                                        <button id="clearCart" class="text-sm text-red-600 hover:underline">Kosongkan</button>
+                                        <button id="closeCart" class="text-slate-400 hover:text-slate-700 text-xl font-bold leading-none">&times;</button>
+                                    </div>
+                                </div>
+
+                                <div id="cartItems" class="divide-y divide-slate-200 max-h-64 overflow-y-auto"></div>
+
+                                <div class="mt-4 flex items-center justify-between">
+                                    <div class="text-sm text-slate-600">Total</div>
+                                    <div id="cartTotal" class="text-lg font-bold text-slate-900">Rp0</div>
+                                </div>
+                                <button id="payBtn" class="mt-5 w-full rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-2.5 hover:brightness-110">Bayar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right controls (mobile) -->
+                    <div class="md:hidden flex items-center gap-2">
+                        <!-- Cart button (MOBILE) -->
+                        <button id="cartBtnMobile" aria-label="Keranjang" class="relative inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white text-primary ring-1 ring-blue-200 shadow-sm hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="9" cy="21" r="1"></circle>
+                                <circle cx="20" cy="21" r="1"></circle>
+                                <path d="M1 1h4l2.68 12.39a2 2 0 0 0 2 1.61h7.72a2 2 0 0 0 2-1.61L21 6H6"></path>
+                            </svg>
+                            <span id="cartBadgeMobile" class="absolute -top-1.5 -right-1.5 min-w-[1.25rem] h-5 px-1 rounded-full bg-red-500 text-white text-[11px] font-bold leading-none flex items-center justify-center ring-2 ring-white">0</span>
+                        </button>
+
+                        <!-- Menu button (MOBILE, opsional) -->
+                        <button id="menuBtn" class="inline-flex items-center justify-center p-2 rounded-md text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-200" aria-controls="mobileMenu" aria-expanded="false" aria-label="Buka menu">
+                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden hidden border-t border-slate-200 bg-white/95 backdrop-blur-sm" role="dialog" aria-modal="true">
+                <div class="px-4 py-3 space-y-2 text-slate-700">
+                    <a href="#home" class="block py-2 hover:text-primary">Beranda</a>
+                    <a href="#about" class="block py-2 hover:text-primary">Tentang</a>
+                    <a href="#program" class="block py-2 hover:text-primary">Layanan</a>
+                    <a href="#blog" class="block py-2 hover:text-primary">Blog</a>
+                    <a href="#video" class="block py-2 hover:text-primary">Video</a>
+                    <a href="#testimoni" class="block py-2 hover:text-primary">Testimoni</a>
+                    <a href="#contact" class="block py-2 hover:text-primary">Kontak</a>
+                    <a href="#login"
+                    class="mt-3 inline-flex w-full justify-center items-center rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:brightness-110">
+                    Login
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- ===== Overlay & Mobile Drawer Cart (di luar header) ===== -->
+        <div id="cartOverlayMobile" class="fixed inset-0 bg-black/30 backdrop-blur-[1px] z-[999] hidden md:hidden"></div>
+
+        <div id="cartPanelMobile" class="fixed inset-y-0 right-0 z-[1000] w-[88vw] max-w-sm translate-x-full md:hidden bg-white shadow-2xl ring-1 ring-blue-100 transition-transform duration-300">
+            <div class="p-5 h-full flex flex-col">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-slate-900">Keranjang</h3>
+                    <div class="flex items-center gap-2">
+                        <button id="clearCartMobile" class="text-sm text-red-600 hover:underline">Kosongkan</button>
+                        <button id="closeCartMobile" class="text-slate-400 hover:text-slate-700 text-xl font-bold leading-none">&times;</button>
+                    </div>
+                </div>
+
+                <div id="cartItemsMobile" class="divide-y divide-slate-200 overflow-y-auto grow"></div>
+
+                <div class="mt-4 flex items-center justify-between">
+                    <div class="text-sm text-slate-600">Total</div>
+                    <div id="cartTotalMobile" class="text-lg font-bold text-slate-900">Rp0</div>
+                </div>
+                <button id="payBtnMobile" class="mt-5 w-full rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-2.5 hover:brightness-110">Bayar</button>
+            </div>
+        </div>
+
+        <!-- ===== MAIN ===== -->
+        <main>
+            <!-- HERO -->
+            <section id="home" class="relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-50 via-blue-50 to-transparent pointer-events-none"></div>
+
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 grid md:grid-cols-2 gap-14 items-center">
+                    <!-- Kolom kiri -->
+                    <div class="space-y-6" data-aos="fade-right">
+                        <h1 class="text-3xl md:text-5xl font-extrabold leading-snug md:leading-tight tracking-tight text-slate-900">
+                        Bimbingan Skripsi yang <span class="text-primary">Mengajarkan</span>, Bukan Mengerjakan
+                        </h1>
+
+                        <div class="pt-2 flex flex-wrap gap-4" data-aos="zoom-in" data-aos-delay="200">
+                            <a href="#contact" class="inline-flex items-center rounded-lg bg-primary px-7 py-3 text-white font-semibold shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all duration-200">Mulai Bimbingan</a>
+                            <a href="#video" class="inline-flex items-center rounded-lg bg-white px-7 py-3 text-primary ring-1 ring-blue-200 hover:ring-blue-300 font-semibold transition-all duration-200">
+                                <svg class="mr-2 h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                                Tonton Video
+                            </a>
+                        </div>
+
+                        <div class="pt-4 flex flex-wrap items-center gap-6 text-base text-slate-500 leading-relaxed" data-aos="fade-up" data-aos-delay="400">
+                            <div class="inline-flex items-center gap-2">
+                                <svg class="h-5 w-5 text-primary" viewBox="0 0 24 24" fill="currentColor"><path d="M9 12l2 2 4-4 2 2-6 6-4-4 2-2z"/></svg>
+                                Revisi Unlimited (kecuali Paket 1)
+                            </div>
+                            <div class="inline-flex items-center gap-2">
+                                <svg class="h-5 w-5 text-primary" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l7 4v10l-7 4-7-4V7z"/></svg>
+                                Rekaman Video Sesi
+                            </div>
+                            <div class="inline-flex items-center gap-2">
+                                <svg class="h-5 w-5 text-primary" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16v2H4zM4 11h16v2H4zM4 16h16v2H4z"/></svg>
+                                Modul & Turnitin Disediakan
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kolom kanan (gambar) -->
+                    <div class="relative flex justify-center md:justify-end" data-aos="fade-left" data-aos-delay="300">
+                        <img src="assets/image/1.png" alt="Ilustrasi ruang bimbingan belajar" class="w-full md:max-w-lg lg:max-w-xl object-contain" />
+                    </div>
+                </div>
+            </section>
+
+            <!-- ABOUT SWC (New Layout Style) -->
+            <section id="about" class="py-20 bg-white">
+                <div class="max-w-7xl mx-auto px-6 lg:px-8 grid md:grid-cols-2 gap-14 items-center">
+
+                    <!-- LEFT IMAGES (collage) -->
+                    <div class="overflow-hidden rounded-2xl" data-aos="zoom-in" data-aos-duration="900">
+                        <img
+                        src="assets/image/pexels-divinetechygirl-1181233.jpg"
+                        alt="Ruang bimbingan belajar dengan suasana tenang"
+                        class="w-full h-full object-cover"
+                        />
+                    </div>
+
+
+                    <!-- RIGHT CONTENT -->
+                    <div data-aos="fade-left" data-aos-duration="900" data-aos-delay="100">
+                        <p class="text-sm font-semibold text-primary uppercase tracking-wide" data-aos="fade-down" data-aos-delay="150">Tentang Kami</p>
+                        <h2 class="mt-2 text-3xl md:text-4xl font-bold text-slate-900" data-aos="fade-up" data-aos-delay="200">Skripsi Wellness Coaching (SWC)</h2>
+                        <p class="mt-4 text-slate-600 leading-relaxed" data-aos="fade-up" data-aos-delay="250">
+                            <strong>Skripsi Wellness Coaching</strong> adalah pendekatan terintegrasi yang memadukan 
+                            bimbingan akademik, mindset coaching, dan manajemen energi agar mahasiswa 
+                            <em>lulus tepat waktu tanpa burnout</em> dengan integritas akademik yang tinggi.
+                        </p>
+
+                        <!-- STATS BOX -->
+                        <div class="mt-8 grid grid-cols-2 gap-4">
+                            <div class="rounded-xl bg-white ring-1 ring-slate-200 shadow-sm p-4 text-center" data-aos="flip-up" data-aos-delay="100">
+                                <p class="text-2xl font-bold text-primary">95%</p>
+                                <p class="text-sm text-slate-600">Kepuasan Mahasiswa</p>
+                            </div>
+                            <div class="rounded-xl bg-white ring-1 ring-slate-200 shadow-sm p-4 text-center" data-aos="flip-up" data-aos-delay="200">
+                                <p class="text-2xl font-bold text-primary">+120</p>
+                                <p class="text-sm text-slate-600">Mahasiswa Aktif</p>
+                            </div>
+                            <div class="rounded-xl bg-white ring-1 ring-slate-200 shadow-sm p-4 text-center" data-aos="flip-up" data-aos-delay="300">
+                                <p class="text-2xl font-bold text-primary">3</p>
+                                <p class="text-sm text-slate-600">Pilar Utama</p>
+                            </div>
+                            <div class="rounded-xl bg-white ring-1 ring-slate-200 shadow-sm p-4 text-center" data-aos="flip-up" data-aos-delay="400">
+                                <p class="text-2xl font-bold text-primary">100%</p>
+                                <p class="text-sm text-slate-600">Pendekatan Edukatif</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PROGRAMS -->
+            <section id="program" class="py-16 md:py-20 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-end justify-between gap-6" data-aos="fade-up">
+                        <h2 class="text-2xl md:text-3xl font-bold text-slate-900">Program Bimbingan Kami</h2>
+                    </div>
+
+                    <div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 items-start">
+
+                        <!-- Paket Pemula -->
+                        <article data-aos="fade-up" data-aos-delay="100" data-card data-id="pemula" data-name="Paket Pemula" data-price="299000" data-sessions="6" class="rounded-2xl bg-white ring-1 ring-blue-100 shadow-sm overflow-hidden flex flex-col">
+                            <div class="relative h-[220px] sm:h-[240px] lg:h-[220px] overflow-hidden bg-blue-50 rounded-t-2xl">
+                                <img src="assets/image/pexels-divinetechygirl-1181233.jpg"
+                                alt="Ilustrasi Paket Pemula"
+                                class="absolute inset-0 w-full h-full object-cover object-center block" />
+                            </div>
+
+                            <div class="p-6 flex flex-col flex-1">
+                                <div>
+                                    <h3 class="font-semibold text-slate-900">Paket Pemula</h3>
+                                    <p class="text-sm text-slate-500">6 sesi</p>
+                                    <ul class="mt-5 space-y-2 text-sm">
+                                        <li class="flex gap-2"><span class="text-emerald-600">✔</span> Modul + Turnitin</li>
+                                        <li class="flex gap-2"><span class="text-emerald-600">✔</span> Rekaman Video</li>
+                                        <li class="flex gap-2"><span class="text-emerald-600">✔</span> Mentor Ahli</li>
+                                    </ul>
+
+                                    <button type="button" data-toggle="details"
+                                        class="mt-6 inline-flex items-center text-primary font-medium hover:underline">
+                                        Lihat Detail
+                                        <svg class="ml-2 h-4 w-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                                    </button>
+
+                                    <div data-details class="hidden mt-4 text-sm text-slate-600 space-y-2">
+                                        <p>Paket dasar untuk memulai skripsi dengan bimbingan terarah.</p>
+                                        <ul class="list-disc pl-5 space-y-1">
+                                            <li>Mapping topik dan tujuan penelitian</li>
+                                            <li>Pengantar metodologi & struktur bab</li>
+                                            <li>Kerangka teori dan rencana progres</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="mt-auto pt-8 border-t border-blue-100 flex justify-end">
+                                    <a href="#cart" data-add-to-cart class="inline-flex items-center rounded-lg bg-primary px-4 py-2 text-white font-semibold hover:bg-blue-700">
+                                        Pilih Paket
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Paket Intensif -->
+                        <article data-aos="fade-up" data-aos-delay="200" data-card data-id="intensif" data-name="Paket Intensif" data-price="599000" data-sessions="12" class="rounded-2xl bg-white ring-1 ring-blue-100 shadow-sm overflow-hidden flex flex-col">
+                            <div class="relative h-[220px] sm:h-[240px] lg:h-[220px] overflow-hidden bg-blue-50 rounded-t-2xl">
+                                <img src="assets/image/pexels-tima-miroshnichenko-5428011.jpg"
+                                alt="Ilustrasi Paket Intensif"
+                                class="absolute inset-0 w-full h-full object-cover object-center block">
+                                <span class="absolute top-3 left-3 rounded-full bg-blue-600/90 text-white text-xs font-semibold px-3 py-1">Populer</span>
+                            </div>
+
+                            <div class="p-6 flex flex-col flex-1">
+                                <div>
+                                    <h3 class="font-semibold text-slate-900">Paket Intensif</h3>
+                                    <p class="text-sm text-slate-500">12 sesi</p>
+                                    <ul class="mt-5 space-y-2 text-sm">
+                                        <li class="flex gap-2"><span class="text-emerald-600">✔</span> Revisi Unlimited</li>
+                                        <li class="flex gap-2"><span class="text-emerald-600">✔</span> Rekaman Video</li>
+                                        <li class="flex gap-2"><span class="text-emerald-600">✔</span> Mentor Ahli</li>
+                                    </ul>
+
+                                    <button type="button" data-toggle="details"
+                                    class="mt-6 inline-flex items-center text-primary font-medium hover:underline">
+                                    Lihat Detail
+                                    <svg class="ml-2 h-4 w-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                                    </button>
+
+                                    <div data-details class="hidden mt-4 text-sm text-slate-600 space-y-2">
+                                        <p>Percepatan progres dari Bab 1 sampai persiapan sidang.</p>
+                                        <ul class="list-disc pl-5 space-y-1">
+                                            <li>Pendampingan Bab 1–5</li>
+                                            <li>Analisis data & interpretasi</li>
+                                            <li>Simulasi sidang mini</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="mt-auto pt-8 border-t border-blue-100 flex justify-end">
+                                    <a href="#cart" data-add-to-cart class="inline-flex items-center rounded-lg bg-primary px-4 py-2 text-white font-semibold hover:bg-blue-700">
+                                        Pilih Paket
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Paket Kuantitatif -->
+                        <article data-aos="fade-up" data-aos-delay="300" data-card data-id="kuantitatif" data-name="Kuantitatif" data-price="749000" data-sessions="8" class="rounded-2xl bg-white ring-1 ring-blue-100 shadow-sm overflow-hidden flex flex-col">
+                            <div class="relative h-[220px] sm:h-[240px] lg:h-[220px] overflow-hidden bg-blue-50 rounded-t-2xl">
+                                <img src="assets/image/pexels-tima-miroshnichenko-5428011.jpg"
+                                alt="Ilustrasi Paket Kuantitatif"
+                                class="absolute inset-0 w-full h-full object-cover object-center block" />
+                            </div>
+
+                            <div class="p-6 flex flex-col flex-1">
+                                <div>
+                                    <h3 class="font-semibold text-slate-900">Kuantitatif</h3>
+                                    <p class="text-sm text-slate-500">Durasi: 2 bulan</p>
+                                    <ul class="mt-5 space-y-2 text-sm">
+                                        <li class="flex gap-2"><span class="text-emerald-600">✔</span> SPSS / R / Python</li>
+                                        <li class="flex gap-2"><span class="text-emerald-600">✔</span> Template Analisis</li>
+                                        <li class="flex gap-2"><span class="text-emerald-600">✔</span> Revisi Unlimited</li>
+                                    </ul>
+
+                                    <button type="button" data-toggle="details"
+                                    class="mt-6 inline-flex items-center text-primary font-medium hover:underline">
+                                    Lihat Detail
+                                    <svg class="ml-2 h-4 w-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                                    </button>
+
+                                    <div data-details class="hidden mt-4 text-sm text-slate-600 space-y-2">
+                                        <ul class="list-disc pl-5 space-y-1">
+                                        <li>Uji validitas & reliabilitas</li>
+                                        <li>Regresi, korelasi, ANOVA</li>
+                                        <li>Interpretasi output & pelaporan</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="mt-auto pt-8 border-t border-blue-100 flex justify-end">
+                                    <a href="#cart" data-add-to-cart class="inline-flex items-center rounded-lg bg-primary px-4 py-2 text-white font-semibold hover:bg-blue-700">
+                                        Pilih Paket
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Paket Kualitatif -->
+                        <article data-aos="fade-up" data-aos-delay="400" data-card data-id="kualitatif" data-name="Kualitatif" data-price="749000" data-sessions="8" class="rounded-2xl bg-white ring-1 ring-blue-100 shadow-sm overflow-hidden flex flex-col">
+                            <div class="relative h-[220px] sm:h-[240px] lg:h-[220px] overflow-hidden bg-blue-50 rounded-t-2xl">
+                                <img src="assets/image/pexels-tirachard-kumtanom-112571-733856.jpg"
+                                alt="Ilustrasi Paket Kualitatif"
+                                class="absolute inset-0 w-full h-full object-cover object-center block" />
+                            </div>
+
+                            <div class="p-6 flex flex-col flex-1">
+                                <div>
+                                    <h3 class="font-semibold text-slate-900">Kualitatif</h3>
+                                    <p class="text-sm text-slate-500">Durasi: 2 bulan</p>
+                                    <ul class="mt-5 space-y-2 text-sm">
+                                        <li class="flex gap-2"><span class="text-emerald-600">✔</span> Wawancara Mendalam</li>
+                                        <li class="flex gap-2"><span class="text-emerald-600">✔</span> Coding & Theming</li>
+                                        <li class="flex gap-2"><span class="text-emerald-600">✔</span> Revisi Unlimited</li>
+                                    </ul>
+
+                                    <button type="button" data-toggle="details"
+                                    class="mt-6 inline-flex items-center text-primary font-medium hover:underline">
+                                    Lihat Detail
+                                    <svg class="ml-2 h-4 w-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                                    </button>
+
+                                    <div data-details class="hidden mt-4 text-sm text-slate-600 space-y-2">
+                                        <ul class="list-disc pl-5 space-y-1">
+                                            <li>Pedoman wawancara & observasi</li>
+                                            <li>Analisis tematik (manual / NVivo)</li>
+                                            <li>Penulisan hasil & validasi data</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="mt-auto pt-8 border-t border-blue-100 flex justify-end">
+                                    <a href="#cart" data-add-to-cart class="inline-flex items-center rounded-lg bg-primary px-4 py-2 text-white font-semibold hover:bg-blue-700">
+                                        Pilih Paket
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- BLOG PREVIEW -->
+            <section id="blog" class="py-16 md:py-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-end justify-between gap-6" data-aos="fade-up">
+                        <h2 class="text-2xl md:text-3xl font-bold text-slate-900">Artikel Terbaru</h2>
+                        <a href="blog.html" class="hidden md:inline-flex items-center text-primary hover:underline" data-aos="fade-left" data-aos-delay="100">Lihat Semua Blog →</a>
+                    </div>
+                    <div class="mt-8 grid gap-6 md:grid-cols-3">
+                        <article data-aos="fade-up" data-aos-delay="100" class="group rounded-2xl bg-white ring-1 ring-blue-100 shadow-sm overflow-hidden">
+                            <div class="relative h-[220px] sm:h-[240px] lg:h-[220px] overflow-hidden bg-blue-50 rounded-t-2xl">
+                                <img src="assets/image/pexels-tirachard-kumtanom-112571-733856.jpg"
+                                alt="Ilustrasi Paket Kualitatif"
+                                class="absolute inset-0 w-full h-full object-cover object-center block" />
+                            </div>
+                            <div class="p-6" data-aos="fade-up" data-aos-delay="180">
+                                <div class="text-xs uppercase tracking-wide text-primary font-semibold">Metodologi</div>
+                                <h3 class="mt-2 font-semibold group-hover:underline">Menyusun Kerangka Teori Bab 2 Tanpa Overload</h3>
+                                <p class="mt-2 text-sm text-slate-600">Langkah praktis memilih referensi berkualitas (2020–2025) dan menyusunnya logis...</p>
+                                <a href="#" class="mt-4 inline-flex items-center text-primary hover:underline">Baca selengkapnya →</a>
+                            </div>
+                        </article>
+
+                        <article data-aos="fade-up" data-aos-delay="200" class="group rounded-2xl bg-white ring-1 ring-blue-100 shadow-sm overflow-hidden">
+                            <div class="relative h-[220px] sm:h-[240px] lg:h-[220px] overflow-hidden bg-blue-50 rounded-t-2xl">
+                                <img src="assets/image/pexels-tirachard-kumtanom-112571-733856.jpg"
+                                alt="Ilustrasi Paket Kualitatif"
+                                class="absolute inset-0 w-full h-full object-cover object-center block" />
+                            </div>
+                            <div class="p-6" data-aos="fade-up" data-aos-delay="280">
+                                <div class="text-xs uppercase tracking-wide text-secondary font-semibold">Analisis Data</div>
+                                <h3 class="mt-2 font-semibold group-hover:underline">Uji Normalitas: Shapiro–Wilk vs Kolmogorov–Smirnov</h3>
+                                <p class="mt-2 text-sm text-slate-600">Kapan memilih SW vs KS, interpretasi p-value, dan contoh SPSS/R...</p>
+                                <a href="#" class="mt-4 inline-flex items-center text-primary hover:underline">Baca selengkapnya →</a>
+                            </div>
+                        </article>
+
+                        <article data-aos-delay="300" class="group rounded-2xl bg-white ring-1 ring-blue-100 shadow-sm overflow-hidden">
+                            <div class="relative h-[220px] sm:h-[240px] lg:h-[220px] overflow-hidden bg-blue-50 rounded-t-2xl">
+                                <img src="assets/image/pexels-tirachard-kumtanom-112571-733856.jpg"
+                                alt="Ilustrasi Paket Kualitatif"
+                                class="absolute inset-0 w-full h-full object-cover object-center block" />
+                            </div>
+                            <div class="p-6" data-aos="fade-up" data-aos-delay="380">
+                                <div class="text-xs uppercase tracking-wide text-emerald-600 font-semibold">Mindset</div>
+                                <h3 class="mt-2 font-semibold group-hover:underline">Anti-Burnout dengan SWC: 30–60–90 Day Plan</h3>
+                                <p class="mt-2 text-sm text-slate-600">Ritme bimbingan yang realistis agar progres konsisten hingga ACC...</p>
+                                <a href="#" class="mt-4 inline-flex items-center text-primary hover:underline">Baca selengkapnya →</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIDEO -->
+            <section id="video" class="py-16 md:py-20 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-end justify-between gap-6" data-aos="fade-up">
+                        <h2 class="text-2xl md:text-3xl font-bold text-slate-900">Video Pembelajaran</h2>
+                        <a href="video.html" class="hidden md:inline-flex items-center text-primary hover:underline" data-aos="fade-left" data-aos-delay="100">Lihat Semua Video →</a>
+                    </div>
+                    <!-- grid video cards -->
+                    <div class="mt-8 grid gap-6 md:grid-cols-3">
+                        <!-- Video 1 -->
+                        <div class="relative aspect-video rounded-xl overflow-hidden ring-1 ring-blue-100 bg-blue-50" data-aos="zoom-in" data-aos-delay="100">
+                            <img src="https://img.youtube.com/vi/TX9qSaGXFyg/maxresdefault.jpg"
+                            alt="Video Pembelajaran"
+                            class="w-full h-full object-cover">
+                            <button data-video="https://www.youtube.com/embed/TX9qSaGXFyg"
+                            class="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition">
+                                <svg class="h-14 w-14 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                            </button>
+                        </div>
+
+                        <!-- Video 2 -->
+                        <div data-aos="zoom-in" data-aos-delay="200" class="relative aspect-video rounded-xl overflow-hidden ring-1 ring-blue-100 bg-blue-50">
+                            <img src="https://img.youtube.com/vi/qQBRv5Q0InA/maxresdefault.jpg"
+                            alt="Video Pembelajaran"
+                            class="w-full h-full object-cover">
+                            <button data-video="https://www.youtube.com/embed/qQBRv5Q0InA"
+                            class="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition">
+                                <svg class="h-14 w-14 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                            </button>
+                        </div>
+
+                        <!-- Video 3 -->
+                        <div data-aos="zoom-in" data-aos-delay="300" class="relative aspect-video rounded-xl overflow-hidden ring-1 ring-blue-100 bg-blue-50">
+                            <img src="https://img.youtube.com/vi/aqz-KE-bpKQ/maxresdefault.jpg"
+                            alt="Video Pembelajaran"
+                            class="w-full h-full object-cover">
+                            <button data-video="https://www.youtube.com/embed/aqz-KE-bpKQ"
+                            class="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition">
+                                <svg class="h-14 w-14 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Modal Video -->
+            <div data-aos="fade-in" id="videoModal" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
+                <div data-aos="zoom-in" data-aos-delay="100" class="relative w-full max-w-3xl aspect-video bg-black rounded-xl overflow-hidden">
+                    <iframe id="videoFrame" class="w-full h-full" src="" frameborder="0"
+                    allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <button id="closeModal"
+                    class="absolute -top-10 right-0 text-white text-3xl font-bold hover:text-red-400">×</button>
+                </div>
+            </div>
+
+            <!-- WHY US (Elegant / Luxe but Simple) -->
+            <section class="relative py-20">
+
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center" data-aos="fade-up" data-aos-duration="900">
+                        <p class="text-sm font-semibold tracking-wide text-blue-600">Kenapa Memilih Kami</p>
+                        <h2 class="mt-2 text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
+                        Pengalaman Bimbingan yang Berkelas
+                        </h2>
+                        <p class="mt-3 text-slate-600 max-w-2xl mx-auto">
+                        Pendekatan edukatif, transparan, dan nyaman—tanpa mengurangi integritas akademik.
+                        </p>
+                    </div>
+
+                    <!-- glass panel wrapper -->
+                    <div data-aos="fade-zoom-in" data-aos-easing="ease-out-cubic" data-aos-duration="800" data-aos-delay="100" class="mt-12 rounded-3xl bg-white/70 backdrop-blur ring-1 ring-white/60 shadow-[0_10px_40px_-10px_rgba(2,6,23,0.15)] p-6 sm:p-8">
+                        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+
+                            <!-- item -->
+                            <article data-aos="fade-up" data-aos-delay="100" class="group rounded-2xl bg-white/80 backdrop-blur ring-1 ring-slate-200 hover:ring-blue-200 transition-all duration-200 p-6 text-center shadow-sm hover:shadow-md">
+                                <div class="mx-auto h-12 w-12 rounded-xl bg-gradient-to-br from-blue-50 to-white ring-1 ring-blue-100 flex items-center justify-center">
+                                    <!-- list icon -->
+                                    <svg class="h-6 w-6 text-slate-800/80 group-hover:text-blue-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+                                </div>
+                                <p class="mt-4 font-semibold text-slate-900">Bimbingan Interaktif</p>
+                                <p class="mt-1 text-sm text-slate-600">Sesi 2-arah, bukan sekadar revisi.</p>
+                            </article>
+
+                            <article data-aos="fade-up" data-aos-delay="180" class="group rounded-2xl bg-white/80 backdrop-blur ring-1 ring-slate-200 hover:ring-blue-200 transition-all duration-200 p-6 text-center shadow-sm hover:shadow-md">
+                                <div class="mx-auto h-12 w-12 rounded-xl bg-gradient-to-br from-blue-50 to-white ring-1 ring-blue-100 flex items-center justify-center">
+                                    <!-- check icon -->
+                                    <svg class="h-6 w-6 text-slate-800/80 group-hover:text-blue-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                                </div>
+                                <p class="mt-4 font-semibold text-slate-900">Revisi Tanpa Batas</p>
+                                <p class="mt-1 text-sm text-slate-600">Sampai ACC/lulus (sesuai paket).</p>
+                            </article>
+
+                            <article data-aos="fade-up" data-aos-delay="260" class="group rounded-2xl bg-white/80 backdrop-blur ring-1 ring-slate-200 hover:ring-blue-200 transition-all duration-200 p-6 text-center shadow-sm hover:shadow-md">
+                                <div class="mx-auto h-12 w-12 rounded-xl bg-gradient-to-br from-blue-50 to-white ring-1 ring-blue-100 flex items-center justify-center">
+                                    <!-- play icon -->
+                                    <svg class="h-6 w-6 text-slate-800/80 group-hover:text-blue-700 transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                                <p class="mt-4 font-semibold text-slate-900">Rekaman Sesi</p>
+                                <p class="mt-1 text-sm text-slate-600">Semua sesi terekam untuk review.</p>
+                            </article>
+
+                            <article data-aos="fade-up" data-aos-delay="340" class="group rounded-2xl bg-white/80 backdrop-blur ring-1 ring-slate-200 hover:ring-blue-200 transition-all duration-200 p-6 text-center shadow-sm hover:shadow-md">
+                                <div class="mx-auto h-12 w-12 rounded-xl bg-gradient-to-br from-blue-50 to-white ring-1 ring-blue-100 flex items-center justify-center">
+                                    <!-- docs icon -->
+                                    <svg class="h-6 w-6 text-slate-800/80 group-hover:text-blue-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+                                </div>
+                                <p class="mt-4 font-semibold text-slate-900">Modul & Turnitin</p>
+                                <p class="mt-1 text-sm text-slate-600">Disediakan untuk peserta aktif.</p>
+                            </article>
+
+                            <article data-aos="fade-up" data-aos-delay="420" class="group rounded-2xl bg-white/80 backdrop-blur ring-1 ring-slate-200 hover:ring-blue-200 transition-all duration-200 p-6 text-center shadow-sm hover:shadow-md">
+                                <div class="mx-auto h-12 w-12 rounded-xl bg-gradient-to-br from-blue-50 to-white ring-1 ring-blue-100 flex items-center justify-center">
+                                    <!-- medal icon -->
+                                    <svg class="h-6 w-6 text-slate-800/80 group-hover:text-blue-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg>
+                                </div>
+                                <p class="mt-4 font-semibold text-slate-900">Mentor Berpengalaman</p>
+                                <p class="mt-1 text-sm text-slate-600">Praktisi & akademisi terkurasi.</p>
+                            </article>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TESTIMONI (Elegant / Luxe & Simple) -->
+            <section id="testimoni" class="relative py-20">
+
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center" data-aos="fade-up" data-aos-duration="900">
+                        <p class="text-sm font-semibold tracking-wide text-blue-600">Cerita Keberhasilan</p>
+                        <h2 class="mt-2 text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
+                            Apa kata mereka tentang bimbingan kami
+                        </h2>
+                        <p class="mt-3 text-slate-600 max-w-2xl mx-auto">
+                            Pendekatan <strong>SWC</strong> membantu mahasiswa paham alur penelitian, bukan sekadar menyelesaikan revisi.
+                        </p>
+                    </div>
+
+                    <!-- cards -->
+                    <div class="mt-12 grid gap-6 md:grid-cols-3">
+                        <!-- Card -->
+                        <figure data-aos="fade-up" data-aos-delay="100" class="group rounded-3xl bg-white/75 backdrop-blur ring-1 ring-white/60 shadow-[0_12px_45px_-12px_rgba(2,6,23,0.15)] p-6 md:p-7 hover:shadow-[0_18px_60px_-16px_rgba(2,6,23,0.18)] transition-shadow">
+                            <div class="flex items-start gap-3">
+                                <span data-aos="zoom-in" data-aos-delay="150" class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 ring-1 ring-blue-100">
+                                    <!-- quote icon -->
+                                    <svg class="h-5 w-5 text-blue-600/90" viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h4v4H9c0 1.7 1.3 3 3 3v3c-3.3 0-6-2.7-6-6V7zm9 0h4v4h-2c0 1.7 1.3 3 3 3v3c-3.3 0-6-2.7-6-6V7z"/></svg>
+                                </span>
+                                <blockquote class="text-slate-800 leading-relaxed">
+                                    “Dulu saya <em>stuck</em> di Bab 2. Setelah 3 sesi SWC, saya paham logika penelitian dan lanjut sampai ACC.”
+                                </blockquote>
+                            </div>
+                            <figcaption data-aos="fade-in" data-aos-delay="200" class="mt-6 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <img src="https://i.pravatar.cc/80?img=12" alt="Anisa" class="h-10 w-10 rounded-full ring-2 ring-white">
+                                    <div>
+                                        <p class="font-semibold text-slate-900">Anisa</p>
+                                        <p class="text-xs text-slate-500">Psikologi — UNY</p>
+                                    </div>
+                                </div>
+                                <!-- stars -->
+                                <div class="flex items-center gap-0.5 text-amber-500">
+                                    <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="m10 15.27 5.18 3.04-1.64-5.65L18 8.63l-5.81-.5L10 2.5 7.81 8.13 2 8.63l4.46 4.03L4.82 18.3 10 15.27z"/></svg>
+                                    <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="m10 15.27 5.18 3.04-1.64-5.65L18 8.63l-5.81-.5L10 2.5 7.81 8.13 2 8.63l4.46 4.03L4.82 18.3 10 15.27z"/></svg>
+                                    <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="m10 15.27 5.18 3.04-1.64-5.65L18 8.63l-5.81-.5L10 2.5 7.81 8.13 2 8.63l4.46 4.03L4.82 18.3 10 15.27z"/></svg>
+                                    <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="m10 15.27 5.18 3.04-1.64-5.65L18 8.63l-5.81-.5L10 2.5 7.81 8.13 2 8.63l4.46 4.03L4.82 18.3 10 15.27z"/></svg>
+                                    <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="m10 15.27 5.18 3.04-1.64-5.65L18 8.63l-5.81-.5L10 2.5 7.81 8.13 2 8.63l4.46 4.03L4.82 18.3 10 15.27z"/></svg>
+                                </div>
+                            </figcaption>
+                        </figure>
+
+                        <figure data-aos="fade-up" data-aos-delay="180" class="group rounded-3xl bg-white/75 backdrop-blur ring-1 ring-white/60 shadow-[0_12px_45px_-12px_rgba(2,6,23,0.15)] p-6 md:p-7 hover:shadow-[0_18px_60px_-16px_rgba(2,6,23,0.18)] transition-shadow">
+                            <div class="flex items-start gap-3">
+                                <span data-aos="zoom-in" data-aos-delay="220" class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 ring-1 ring-blue-100">
+                                    <svg class="h-5 w-5 text-blue-600/90" viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h4v4H9c0 1.7 1.3 3 3 3v3c-3.3 0-6-2.7-6-6V7zm9 0h4v4h-2c0 1.7 1.3 3 3 3v3c-3.3 0-6-2.7-6-6V7z"/></svg>
+                                </span>
+                                <blockquote class="text-slate-800 leading-relaxed">
+                                    “Mentornya sabar, step-by-step, dan kasih template analisis yang gampang diikuti.”
+                                </blockquote>
+                            </div>
+                            <figcaption data-aos="fade-in" data-aos-delay="260" class="mt-6 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <img src="https://i.pravatar.cc/80?img=32" alt="Raka" class="h-10 w-10 rounded-full ring-2 ring-white">
+                                    <div>
+                                        <p class="font-semibold text-slate-900">Raka</p>
+                                        <p class="text-xs text-slate-500">Manajemen — UGM</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-50 ring-1 ring-blue-100 text-blue-700">Paket Intensif</span>
+                            </figcaption>
+                        </figure>
+
+                        <figure data-aos="fade-up" data-aos-delay="260" class="group rounded-3xl bg-white/75 backdrop-blur ring-1 ring-white/60 shadow-[0_12px_45px_-12px_rgba(2,6,23,0.15)] p-6 md:p-7 hover:shadow-[0_18px_60px_-16px_rgba(2,6,23,0.18)] transition-shadow">
+                            <div class="flex items-start gap-3">
+                                <span data-aos="zoom-in" data-aos-delay="300" class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 ring-1 ring-blue-100">
+                                    <svg class="h-5 w-5 text-blue-600/90" viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h4v4H9c0 1.7 1.3 3 3 3v3c-3.3 0-6-2.7-6-6V7zm9 0h4v4h-2c0 1.7 1.3 3 3 3v3c-3.3 0-6-2.7-6-6V7z"/></svg>
+                                </span>
+                                <blockquote class="text-slate-800 leading-relaxed">
+                                    “Jadwal fleksibel dan ada rekaman video. Review materi jadi enak kapan pun.”
+                                </blockquote>
+                            </div>
+                            <figcaption data-aos="fade-in" data-aos-delay="340" class="mt-6 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <img src="https://i.pravatar.cc/80?img=5" alt="Dina" class="h-10 w-10 rounded-full ring-2 ring-white">
+                                    <div>
+                                        <p class="font-semibold text-slate-900">Dina</p>
+                                        <p class="text-xs text-slate-500">Informatika — UM</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-0.5 text-amber-500">
+                                    <!-- 4.5 stars look -->
+                                    <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="m10 15.27 5.18 3.04-1.64-5.65L18 8.63l-5.81-.5L10 2.5 7.81 8.13 2 8.63l4.46 4.03L4.82 18.3 10 15.27z"/></svg>
+                                    <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="m10 15.27 5.18 3.04-1.64-5.65L18 8.63l-5.81-.5L10 2.5 7.81 8.13 2 8.63l4.46 4.03L4.82 18.3 10 15.27z"/></svg>
+                                    <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="m10 15.27 5.18 3.04-1.64-5.65L18 8.63l-5.81-.5L10 2.5 7.81 8.13 2 8.63l4.46 4.03L4.82 18.3 10 15.27z"/></svg>
+                                    <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="m10 15.27 5.18 3.04-1.64-5.65L18 8.63l-5.81-.5L10 2.5 7.81 8.13 2 8.63l4.46 4.03L4.82 18.3 10 15.27z"/></svg>
+                                    <svg class="h-4 w-4 text-amber-300" viewBox="0 0 20 20" fill="currentColor"><defs><linearGradient id="half" x1="0" x2="1"><stop offset="50%" stop-color="currentColor"/><stop offset="50%" stop-color="transparent"/></linearGradient></defs><path d="m10 15.27 5.18 3.04-1.64-5.65L18 8.63l-5.81-.5L10 2.5 7.81 8.13 2 8.63l4.46 4.03L4.82 18.3 10 15.27z" fill="url(#half)"/></svg>
+                                </div>
+                            </figcaption>
+                        </figure>
+                    </div>
+
+                    <!-- CTA soft -->
+                    <div class="mt-10 text-center" data-aos="fade-up" data-aos-delay="150">
+                        <a href="#contact" class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-3 text-white font-semibold shadow hover:shadow-md hover:brightness-105 transition">
+                        Mulai Bimbingan
+                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CONTACT (Elegant / Luxe but Simple) -->
+            <section id="contact" class="relative py-20">
+
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center" data-aos="fade-up" data-aos-duration="900">
+                        <p class="text-sm font-semibold tracking-wide text-blue-600">Konsultasi Gratis</p>
+                        <h2 class="mt-2 text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
+                            Mulai bimbinganmu dengan nyaman & terarah
+                        </h2>
+                        <p class="mt-3 text-slate-600 max-w-2xl mx-auto">
+                        Isi form singkat berikut, tim kami akan menghubungi dalam waktu dekat.
+                        </p>
+                    </div>
+
+                    <!-- gradient frame + glass card -->
+                    <div class="mt-10" data-aos="fade-zoom-in" data-aos-easing="ease-out-cubic" data-aos-duration="800" data-aos-delay="50">
+                        <div class="rounded-[28px] p-[1px] bg-gradient-to-br from-blue-200/60 via-white to-indigo-200/60">
+                            <div class="rounded-[26px] bg-white/80 backdrop-blur ring-1 ring-white/60 shadow-[0_18px_60px_-16px_rgba(2,6,23,0.15)]">
+                                <div class="p-6 sm:p-8 lg:p-10 grid lg:grid-cols-2 gap-10">
+
+                                    <!-- Left: info / trust -->
+                                    <div class="space-y-6">
+                                        <div data-aos="fade-up" data-aos-delay="100" class="rounded-2xl bg-white/80 ring-1 ring-slate-200 p-5">
+                                            <h3 class="text-lg font-semibold text-slate-900">Kenapa konsultasi dulu?</h3>
+                                            <ul class="mt-3 space-y-2 text-sm text-slate-600">
+                                                <li class="flex gap-2" data-aos="fade-right" data-aos-delay="150">
+                                                    <span class="text-emerald-600">✔</span> Pemetaan kebutuhan & rencana bimbingan
+                                                </li>
+                                                <li class="flex gap-2" data-aos="fade-right" data-aos-delay="200">
+                                                    <span class="text-emerald-600">✔</span> Rekomendasi paket sesuai progresmu
+                                                </li>
+                                                <li class="flex gap-2" data-aos="fade-right" data-aos-delay="250">
+                                                    <span class="text-emerald-600">✔</span> Tanpa biaya & tanpa komitmen
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="rounded-2xl bg-white/80 ring-1 ring-slate-200 p-5" data-aos="fade-up" data-aos-delay="180">
+                                            <h4 class="text-sm font-semibold text-slate-900">Kontak Cepat</h4>
+                                            <div class="mt-3 space-y-3 text-sm text-slate-700">
+                                                <p class="flex items-center gap-2" data-aos="fade-left" data-aos-delay="220">
+                                                    <svg class="h-5 w-5 text-primary" viewBox="0 0 24 24" fill="currentColor"><path d="M2 4a2 2 0 0 1 2-2h3l2 3h9a2 2 0 0 1 2 2v11a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3z"/></svg>
+                                                    support@guebimbing.in
+                                                </p>
+                                                <p class="flex items-center gap-2" data-aos="fade-left" data-aos-delay="260">
+                                                    <svg class="h-5 w-5 text-primary" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20a2 2 0 0 1-2 2C9.6 22 2 14.4 2 5a2 2 0 0 1 2-2h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1z"/></svg>
+                                                    +62 812-3456-7890
+                                                </p>
+                                                <p class="flex items-center gap-2" data-aos="fade-left" data-aos-delay="300">
+                                                    <svg class="h-5 w-5 text-primary" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5.3 5.2 10.3 6.6 11.5.2.1.6.1.8 0C13.8 19.3 19 14.3 19 9a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5z"/></svg>
+                                                    Online (Zoom/Meet) & Fleksibel Jadwal
+                                                </p>
+                                            </div>
+
+                                            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener"
+                                            class="mt-4 inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-4 py-3 text-white font-semibold shadow hover:brightness-110" data-aos="zoom-in" data-aos-delay="340">
+                                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M20 12a8 8 0 10-15.5 3.5L4 21l5.7-1.5A8 8 0 1020 12z"/></svg>
+                                                Chat WhatsApp
+                                            </a>
+                                        </div>
+
+                                        <p class="text-xs text-slate-500" data-aos="fade-in" data-aos-delay="120">
+                                            Dengan mengirim formulir ini, kamu setuju pada kebijakan privasi kami. Data hanya digunakan untuk keperluan bimbingan.
+                                        </p>
+                                    </div>
+
+                                    <!-- Right: form -->
+                                    <form class="space-y-5" aria-label="Form Konsultasi Gratis" data-aos="fade-up" data-aos-delay="140">
+                                        <!-- 2-col grid -->
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <label class="block" data-aos="fade-up" data-aos-delay="160">
+                                                <span class="text-sm text-slate-700">Nama</span>
+                                                <input required name="nama" type="text" autocomplete="name"
+                                                class="mt-1 w-full rounded-xl border-slate-200 focus:border-primary focus:ring-primary"
+                                                placeholder="Nama lengkap" />
+                                            </label>
+                                            <label class="block" data-aos="fade-up" data-aos-delay="180">
+                                                <span class="text-sm text-slate-700">Email</span>
+                                                <input required name="email" type="email" autocomplete="email"
+                                                class="mt-1 w-full rounded-xl border-slate-200 focus:border-primary focus:ring-primary"
+                                                placeholder="email@kampus.ac.id" />
+                                            </label>
+                                            <label class="block" data-aos="fade-up" data-aos-delay="200">
+                                                <span class="text-sm text-slate-700">Jurusan</span>
+                                                <input name="jurusan" type="text" autocomplete="organization-title"
+                                                class="mt-1 w-full rounded-xl border-slate-200 focus:border-primary focus:ring-primary"
+                                                placeholder="Contoh: Informatika" />
+                                            </label>
+                                            <label class="block" data-aos="fade-up" data-aos-delay="220">
+                                                <span class="text-sm text-slate-700">Paket (opsional)</span>
+                                                <select name="paket"
+                                                class="mt-1 w-full rounded-xl border-slate-200 focus:border-primary focus:ring-primary">
+                                                    <option value="">— Pilih Paket —</option>
+                                                    <option>Pemula (6 sesi)</option>
+                                                    <option>Intensif (12 sesi)</option>
+                                                    <option>Kuantitatif (2 bulan)</option>
+                                                    <option>Kualitatif (2 bulan)</option>
+                                                </select>
+                                            </label>
+                                        </div>
+
+                                        <label class="block" data-aos="fade-up" data-aos-delay="240">
+                                            <span class="text-sm text-slate-700">Topik/Judul (opsional)</span>
+                                            <input name="topik" type="text"
+                                            class="mt-1 w-full rounded-xl border-slate-200 focus:border-primary focus:ring-primary"
+                                            placeholder="Contoh: Pengaruh Self-Efficacy terhadap Prokrastinasi" />
+                                        </label>
+
+                                        <label class="block" data-aos="fade-up" data-aos-delay="260">
+                                            <span class="text-sm text-slate-700">Pesan</span>
+                                            <textarea required name="pesan" rows="4"
+                                            class="mt-1 w-full rounded-xl border-slate-200 focus:border-primary focus:ring-primary"
+                                            placeholder="Ceritakan kebutuhan bimbinganmu..."></textarea>
+                                        </label>
+
+                                        <div class="flex items-start gap-3" data-aos="fade-up" data-aos-delay="280">
+                                            <input id="consent" type="checkbox" class="mt-1 rounded border-slate-300 text-primary focus:ring-primary" required>
+                                            <label for="consent" class="text-sm text-slate-600">
+                                                Saya bersedia dihubungi via email/WhatsApp untuk keperluan konsultasi.
+                                            </label>
+                                        </div>
+
+                                        <div class="pt-4 flex flex-wrap items-center gap-3" data-aos="fade-up" data-aos-delay="300">
+                                            <button type="submit"
+                                            class="inline-flex items-center rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3 text-white font-semibold shadow hover:shadow-md hover:brightness-105">
+                                                Kirim Pesan
+                                            </button>
+
+                                            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener"
+                                            class="inline-flex items-center gap-2 rounded-xl bg-emerald-50 px-4 py-3 text-emerald-700 ring-1 ring-emerald-200 hover:bg-emerald-100">
+                                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M20 12a8 8 0 10-15.5 3.5L4 21l5.7-1.5A8 8 0 1020 12z"/></svg>
+                                                Chat WhatsApp
+                                            </a>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+
+        <footer class="relative border-t border-slate-200/70 bg-gradient-to-br from-white via-blue-50 to-blue-100/30">
+            <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 py-16">
+                <div class="grid gap-12 md:grid-cols-3">
+                    <!-- Brand -->
+                    <div>
+                        <div class="flex items-center gap-3">
+                            <div class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/80 ring-1 ring-blue-200 shadow-sm backdrop-blur">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="text-blue-600" aria-hidden="true">
+                                <path d="M4 5a2 2 0 0 1 2-2h9a1 1 0 0 1 .8.4l3 3a1 1 0 0 1 .2.6V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5zM6 5v14h11V8h-2a2 2 0 0 1-2-2V4H6z"/>
+                                </svg>
+                            </div>
+                            <span class="text-lg font-bold tracking-tight text-slate-900">@guebimbing.in</span>
+                        </div>
+                        <p class="mt-4 text-sm text-slate-600 max-w-xs leading-relaxed">
+                        <span class="font-medium text-primary">Belajar, Bimbing, Lulus</span> — dengan Wellness & Integrity.
+                        </p>
+                    </div>
+
+                    <!-- Navigation -->
+                    <nav aria-label="Footer" class="grid grid-cols-2 gap-10">
+                        <div>
+                            <h4 class="text-sm font-semibold text-slate-900 mb-3">Menu</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li><a href="#program" class="hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 rounded">Program</a></li>
+                                <li><a href="#blog" class="hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 rounded">Blog</a></li>
+                                <li><a href="#video" class="hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 rounded">Video</a></li>
+                                <li><a href="#contact" class="hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 rounded">Kontak</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-slate-900 mb-3">Sosial</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>
+                                        <a href="#" class="flex items-center gap-2 hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 rounded">
+                                            <svg class="h-4 w-4 text-blue-600" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                            <path d="M8 3C5.8 3 4 4.8 4 7v10c0 2.2 1.8 4 4 4h10c2.2 0 4-1.8 4-4V7c0-2.2-1.8-4-4-4H8zm10 2c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2h-2v-6h2.3l.4-2.8H16V8.5c0-.8.3-1.2 1.3-1.2h1V5.5h-1.6C14.9 5.5 14 6.6 14 8.3V10h-2v2h2v6h-4V5h8z"/>
+                                            </svg>
+                                            Instagram
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center gap-2 hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 rounded">
+                                            <svg class="h-4 w-4 text-blue-600" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                                <path d="M9 8l10 4-10 4V8z"/>
+                                            </svg>
+                                            YouTube
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center gap-2 hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 rounded">
+                                            <svg class="h-4 w-4 text-blue-600" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                                <path d="M12 2a10 10 0 1 0 10 10A10.01 10.01 0 0 0 12 2zm.1 15.6h-.2c-1.3 0-2.4-.3-3.3-.8l.5-2.1a6.2 6.2 0 0 0 2.6.7c.8 0 1.3-.3 1.3-.9 0-.4-.2-.8-.8-1.1l-.6-.3c-1.6-.8-2.4-1.8-2.4-3.1 0-2 1.5-3.4 3.8-3.4 1.1 0 2.1.2 3 .6l-.5 2a5.3 5.3 0 0 0-2.5-.6c-.7 0-1.2.3-1.2.8s.3.8.9 1.1l.6.3c1.5.7 2.2 1.7 2.2 3 0 2.1-1.6 3.6-3.9 3.6z"/>
+                                            </svg>
+                                             TikTok
+                                        </a>
+                                    </li>
+                                </ul>
+                        </div>
+                    </nav>
+
+                    <!-- Hours & Location -->
+                    <div>
+                        <h4 class="text-sm font-semibold text-slate-900 mb-3">Jam Operasional</h4>
+                        <ul class="text-sm text-slate-600 space-y-1">
+                            <li>Senin – Jumat: 09.00 – 21.00 WIB</li>
+                            <li>Sabtu: 09.00 – 17.00 WIB</li>
+                            <li>Minggu & Hari Libur: Tutup</li>
+                        </ul>
+                        <p class="mt-4 text-sm text-slate-600">
+                            <svg class="inline-block h-4 w-4 text-blue-600 mr-1 align-[-2px]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 2a7 7 0 0 0-7 7c0 5.3 5.2 10.3 6.6 11.5.2.1.6.1.8 0C13.8 19.3 19 14.3 19 9a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5z"/>
+                            </svg>
+                            Malang, Jawa Timur
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- divider -->
+                <div class="mt-12 border-t border-slate-200/80"></div>
+
+                <!-- bottom bar -->
+                <div class="mt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs text-slate-500">
+                    <p>© <span id="yearSpan"></span> <strong>@guebimbing.in</strong>. All rights reserved.</p>
+                    <div class="flex items-center gap-4">
+                        <a href="#" class="hover:text-slate-700">Kebijakan Privasi</a>
+                        <span class="hidden md:inline-block h-3 w-px bg-slate-300/80"></span>
+                        <a href="#" class="hover:text-slate-700">Syarat & Ketentuan</a>
+                        <span class="hidden md:inline-block h-3 w-px bg-slate-300/80"></span>
+                        <a href="#home" class="inline-flex items-center gap-1 hover:text-slate-700">
+                            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+                            Kembali ke atas
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="index.js"></script>
+        <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+        <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            AOS.init({
+            duration: 1000, // durasi animasi (ms)
+            once: true,     // animasi hanya sekali saat di-scroll
+            offset: 100,    // jarak sebelum animasi mulai
+            disable: 'mobile',
+            });
+        });
+        </script>
+    </body>
+</html>
